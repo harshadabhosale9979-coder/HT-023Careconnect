@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Daily Health Message</title>
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: url("bg_message.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+.card {
+    background: rgba(255,255,255,0.35);
+    padding: 30px;
+    border-radius:15px;
+    width: 500px;
+    backdrop-filter: blur(10px);
+    border:1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align:center;
+}
+#dailyMsg {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+<h1>📌 Daily Health Tip</h1>
+<div id="dailyMsg">Loading your tip...</div>
+<button onclick="goBack()" style="margin-top:20px;padding:10px 20px;border:none;background:#6c63ff;color:white;border-radius:8px;cursor:pointer;">Back to Tracker</button>
+</div>
+
+<script>
+// Show random daily message
+let messages = [
+    "💧 Drink more water to stay hydrated!",
+    "💊 Take your medicine on time!",
+    "🚶‍♂️ Walk at least 30 minutes today!",
+    "🧘‍♀️ Meditate or relax for stress relief!",
+    "🛌 Sleep well tonight for recovery!",
+    "📵 Reduce screen time to relax your eyes!",
+    "🥗 Eat a healthy, balanced meal!"
+];
+let randomMsg = messages[Math.floor(Math.random() * messages.length)];
+document.getElementById("dailyMsg").innerText = randomMsg;
+
+// Back button
+function goBack() {
+    window.location.href = "tracker_dashboard.html";
+}
+</script>
+
+</body>
+</html>

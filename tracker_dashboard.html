@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Daily Health Tracker</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url("bg_dashboard.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 30px;
+}
+.card {
+    background: rgba(255,255,255,0.3);
+    padding: 25px;
+    border-radius: 15px;
+    width: 500px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+h1 { text-align:center; margin-bottom:20px; }
+.tracker-item { margin-bottom:15px; }
+.tracker-item label { display:block; font-weight:bold; margin-bottom:5px; }
+.tracker-item input { width:100%; padding:5px; border-radius:6px; border:1px solid #ccc; margin-bottom:5px; }
+.progress-container { background:#eee; border-radius:10px; overflow:hidden; height:25px; margin-bottom:10px; }
+.progress-bar { height:25px; background:#6c63ff; width:0%; color:white; text-align:center; line-height:25px; font-weight:bold; transition: width 0.5s ease; }
+.btn { width:100%; padding:10px; border:none; background:#6c63ff; color:white; font-size:16px; border-radius:8px; cursor:pointer; margin-top:5px; }
+.btn:hover { background:#574fd6; }
+</style>
+</head>
+<body>
+
+<div class="card">
+<h1>Daily Health Tracker</h1>
+
+<div class="tracker-item">
+    <label>Water Intake (ml)</label>
+    <input type="number" id="waterInput" placeholder="Enter water intake">
+    <div class="progress-container">
+        <div class="progress-bar" id="waterBar">0 / 2000 ml</div>
+    </div>
+</div>
+
+<div class="tracker-item">
+    <label>Heartbeat (BPM)</label>
+    <input type="number" id="heartInput" placeholder="Enter heartbeat">
+    <div class="progress-container">
+        <div class="progress-bar" id="heartBar">0 / 120 BPM</div>
+    </div>
+</div>
+
+<div class="tracker-item">
+    <label>Steps</label>
+    <input type="number" id="stepsInput" placeholder="Enter steps">
+    <div class="progress-container">
+        <div class="progress-bar" id="stepsBar">0 / 10000 steps</div>
+    </div>
+</div>
+
+<div class="tracker-item">
+    <label>Screen Time (hours)</label>
+    <input type="number" id="screenInput" placeholder="Enter screen time">
+    <div class="progress-container">
+        <div class="progress-bar" id="screenBar">0 / 8 h</div>
+    </div>
+</div>
+
+<div class="tracker-item">
+    <label>Sleep Time (hours)</label>
+    <input type="number" id="sleepInput" placeholder="Enter sleep hours">
+    <div class="progress-container">
+        <div class="progress-bar" id="sleepBar">0 / 8 h</div>
+    </div>
+</div>
+
+<button class="btn" onclick="updateProgress()">Update Today's Progress</button>
+
+</div>
+
+<script>
+function updateProgress() {
+    // Get user input
+    let water = parseInt(document.getElementById("waterInput").value) || 0;
+    let heart = parseInt(document.getElementById("heartInput").value) || 0;
+    let steps = parseInt(document.getElementById("stepsInput").value) || 0;
+    let screen = parseInt(document.getElementById("screenInput").value) || 0;
+    let sleep = parseInt(document.getElementById("sleepInput").value) || 0;
+
+    // Update progress bars
+    document.getElementById("waterBar").style.width = ${Math.min((water/2000)*100,100)}%;
+    document.getElementById("waterBar").innerText = ${water} / 2000 ml;
+    document.getElementById("heartBar").style.width = ${Math.min((heart/120)*100,100)}%;
+    document.getElementById("heartBar").innerText = ${heart} / 120 BPM;
+    document.getElementById("stepsBar").style.width = ${Math.min((steps/10000)*100,100)}%;
+    document.getElementById("stepsBar").innerText = ${steps} / 10000 steps;
+    document.getElementById("screenBar").style.width = ${Math.min((screen/8)*100,100)}%;
+    document.getElementById("screenBar").innerText = ${screen} / 8 h;
+    document.getElementById("sleepBar").style.width = ${Math.min((sleep/8)*100,100)}%;
+    document.getElementById("sleepBar").innerText = ${sleep} / 8 h;
+
+    // Redirect to Daily Message Page (4th page)
+    window.location.href = "daily_message.html";
+}
+</script>
+
+</body>
+</html>

@@ -2,37 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Your Information</title>
-
+<title>Glow & Health Tracker - User Form</title>
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    height: 100vh;
+    background: url("bg.jpg") no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background-image: url("bg.jpg");
-    background-size: cover;
-    background-position: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 30px;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.25); /* transparent white */
+    background: rgba(255,255,255,0.25);
     padding: 35px;
     border-radius: 15px;
-    width: 420px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-
-    backdrop-filter: blur(10px);        /* glass blur */
-    -webkit-backdrop-filter: blur(10px);/* mobile support */
+    width: 500px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
 }
-    
-
 
 h1 {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 label {
@@ -57,23 +55,31 @@ input, select, textarea {
     font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
+    margin-top: 5px;
 }
 
-.result {
+.btn:hover {
+    background: #574fd6;
+}
+
+.result, .tracker, .monthly {
     margin-top: 20px;
     padding: 15px;
     background: #f0f0f0;
     border-radius: 10px;
 }
+
+.tracker-item {
+    margin-bottom: 8px;
+}
 </style>
 </head>
-
 <body>
 
 <div class="card">
-<h1>Your Information</h1>
+<h1>Glow & Health Tracker</h1>
 
-<form onsubmit="generatePlan(event)">
+<form id="userForm">
 
 <label>Full Name</label>
 <input type="text" required>
@@ -97,39 +103,76 @@ input, select, textarea {
 <option value="none">No Major Issue</option>
 </select>
 
-<button class="btn">Get Health Plan</button>
-
-</form>
+<button type="button" class="btn" onclick="generatePlan()">Get Health Plan</button>
 
 <div id="resultBox"></div>
+<div id="trackerBox"></div>
+<div id="monthlyBox"></div>
 
+<button type="submit" class="btn">Submit</button>
+<!-- Optional Next button -->
+<button type="button" class="btn" onclick="goNext()" style="margin-top:10px;">Next</button>
+
+</form>
 </div>
 
 <script>
-function generatePlan(event) {
-    event.preventDefault();
-
+// Generate plan based on issue
+function generatePlan() {
     let issue = document.getElementById("issue").value;
     let plan = "";
+    let tracker = [];
+    let monthly = [];
 
     if(issue === "bp") {
         plan = "✔ Reduce salt intake<br>✔ Daily 30 min walking<br>✔ Stress management<br>✔ Regular BP monitoring";
+        tracker = ["Morning: Check BP","Breakfast: Take medicine","Evening: 30 min walk","Night: Relax & meditate"];
+        monthly = ["Week 1: Monitor BP daily","Week 2: Adjust diet","Week 3: Track exercise","Week 4: Review progress"];
     }
     else if(issue === "diabetes") {
         plan = "✔ Avoid sugar foods<br>✔ Daily exercise<br>✔ Balanced diet<br>✔ Regular sugar check";
+        tracker = ["Morning: Sugar check","Breakfast: Avoid sugary foods","Evening: Light exercise","Night: Prepare healthy snacks"];
+        monthly = ["Week 1: Track sugar","Week 2: Adjust meals","Week 3: Monitor activity","Week 4: Review progress"];
     }
     else if(issue === "obesity") {
         plan = "✔ Low calorie diet<br>✔ Cardio exercise<br>✔ Drink more water<br>✔ Regular weight tracking";
+        tracker = ["Morning: 20 min cardio","Throughout day: Drink water","Lunch: Low calorie meal","Evening: Track weight"];
+        monthly = ["Week 1: Track diet","Week 2: Cardio sessions","Week 3: Water intake","Week 4: Review progress"];
     }
     else if(issue === "stress") {
         plan = "✔ Meditation<br>✔ Proper sleep<br>✔ Reduce screen time<br>✔ Deep breathing exercises";
+        tracker = ["Morning: Deep breathing","Afternoon: Short walk","Evening: Meditation","Night: Sleep 7-8 hours"];
+        monthly = ["Week 1: Meditate daily","Week 2: Reduce screen time","Week 3: Journaling","Week 4: Review progress"];
     }
     else {
         plan = "✔ Maintain healthy diet<br>✔ Daily exercise<br>✔ Proper hydration<br>✔ Good sleep routine";
+        tracker = ["Morning: Drink water","Throughout day: Stay active","Meal: Balanced diet","Night: Sleep well"];
+        monthly = ["Week 1-4: Follow healthy lifestyle"];
     }
 
-    document.getElementById("resultBox").innerHTML =
-    "<div class='result'><h3>Recommended Health Plan</h3>" + plan + "</div>";
+    document.getElementById("resultBox").innerHTML = `<div class='result'><h3>Recommended Health Plan</h3>${plan}</div>`;
+
+    let trackerHTML = "<div class='tracker'><h3>Daily Tracking Messages</h3>";
+    tracker.forEach(item => { trackerHTML += `<div class='tracker-item'>📌 ${item}</div>`; });
+    trackerHTML += "</div>";
+    document.getElementById("trackerBox").innerHTML = trackerHTML;
+
+    let monthlyHTML = "<div class='monthly'><h3>Monthly Routine</h3>";
+    monthly.forEach(item => { monthlyHTML += `<div class='tracker-item'>✅ ${item}</div>`; });
+    monthlyHTML += "</div>";
+    document.getElementById("monthlyBox").innerHTML = monthlyHTML;
+}
+
+// Form submit - automatically go to 3rd page
+document.getElementById("userForm").addEventListener("submit", function(event){
+    event.preventDefault();
+    alert("Information submitted successfully!");
+    window.location.href = "tracker_dashboard.html"; // 3rd page
+});
+
+// Optional Next button
+function goNext() {
+    window.location.href = "tracker_dashboard.html";
 }
 </script>
 
