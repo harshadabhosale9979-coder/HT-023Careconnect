@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Your Information</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("bg.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.25); /* transparent white */
+    padding: 35px;
+    border-radius: 15px;
+    width: 420px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+    backdrop-filter: blur(10px);        /* glass blur */
+    -webkit-backdrop-filter: blur(10px);/* mobile support */
+    border: 1px solid rgba(255,255,255,0.3);
+}
+    
+
+
+h1 {
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #6c63ff;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h1>Your Information</h1>
+
+<form onsubmit="generatePlan(event)">
+
+<label>Full Name</label>
+<input type="text" required>
+
+<label>Age</label>
+<input type="number" required>
+
+<label>Address</label>
+<textarea rows="2" required></textarea>
+
+<label>Mobile Number</label>
+<input type="tel" required>
+
+<label>Select Your Health Issue</label>
+<select id="issue" required>
+<option value="">Select</option>
+<option value="bp">High Blood Pressure</option>
+<option value="diabetes">Diabetes</option>
+<option value="obesity">Weight Gain</option>
+<option value="stress">Stress / Anxiety</option>
+<option value="none">No Major Issue</option>
+</select>
+
+<button class="btn">Get Health Plan</button>
+
+</form>
+
+<div id="resultBox"></div>
+
+</div>
+
+<script>
+function generatePlan(event) {
+    event.preventDefault();
+
+    let issue = document.getElementById("issue").value;
+    let plan = "";
+
+    if(issue === "bp") {
+        plan = "✔ Reduce salt intake<br>✔ Daily 30 min walking<br>✔ Stress management<br>✔ Regular BP monitoring";
+    }
+    else if(issue === "diabetes") {
+        plan = "✔ Avoid sugar foods<br>✔ Daily exercise<br>✔ Balanced diet<br>✔ Regular sugar check";
+    }
+    else if(issue === "obesity") {
+        plan = "✔ Low calorie diet<br>✔ Cardio exercise<br>✔ Drink more water<br>✔ Regular weight tracking";
+    }
+    else if(issue === "stress") {
+        plan = "✔ Meditation<br>✔ Proper sleep<br>✔ Reduce screen time<br>✔ Deep breathing exercises";
+    }
+    else {
+        plan = "✔ Maintain healthy diet<br>✔ Daily exercise<br>✔ Proper hydration<br>✔ Good sleep routine";
+    }
+
+    document.getElementById("resultBox").innerHTML =
+    "<div class='result'><h3>Recommended Health Plan</h3>" + plan + "</div>";
+}
+</script>
+
+</body>
+</html>
