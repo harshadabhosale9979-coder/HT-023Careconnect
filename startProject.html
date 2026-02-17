@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Project Overview</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url("The Applied Science of Learning.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.card {
+    background: rgba(255,255,255,0.9);
+    padding: 40px;
+    border-radius: 15px;
+    width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    color: #444;
+    line-height: 1.6;
+}
+
+.btn {
+    margin-top: 25px;
+    padding: 10px 20px;
+    border: none;
+    background: #6c63ff;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #574fd6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Problems</h1>
+
+<p>
+Many people do not maintain a healthy lifestyle due to lack of regular exercise,
+insufficient water intake, missed medications, and excessive mobile usage.
+These habits negatively affect physical and mental health.
+A smart monitoring system is needed to encourage healthy daily routines.
+</p>
+
+<button class="btn" onclick="showSolution()">Next</button>
+
+</div>
+
+<script>
+function showSolution() {
+    document.querySelector(".card").innerHTML = `
+        <h1>Solution Overview</h1>
+
+        <p>
+        Glow & Health Tracker monitors exercise, water intake,
+        medicine schedules, and screen time. The system provides reminders,
+        tracks health progress, and promotes a balanced lifestyle.
+        </p>
+    `;
+}
+</script>
+
+</body>
+</html>
